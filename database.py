@@ -37,8 +37,6 @@ def init_db():
                         orderid INTEGER,
                         materials TEXT,
                         cost REAL,
-                        deliverydate TEXT,
-                        isDelivered INTEGER,
                         FOREIGN(customerid) REFERENCES customer(customerid) ON DELETE CASCADE,
                         FOREIGN KEY(orderid) REFERENCES orders(orderid) ON DELETE CASCADE
                 );

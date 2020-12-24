@@ -6,7 +6,11 @@ app = Flask(__name__)
 # @app.route('/')
 # def index():
 #     title = 'MY FLASK EXP'
-#     return render_template('layout.html', title=title)
+#     return render_template('layout.html')
+
+@app.route('/add')
+def customer():
+    return render_template('add_orders.html')
 
 @app.route('/add_customer_button', methods=["POST"])
 def  add_customer():
@@ -24,8 +28,11 @@ def  add_customer():
     conn.commit()
     conn.close()
 
-    return render_template("add_customer.html")
+    return "Successful"
 
+@app.route('/order')
+def order():
+    return render_template('add_orders.html')
 
 @app.route('/add_orders_button', methods=["POST"])
 def  add_orders():
@@ -48,6 +55,10 @@ def  add_orders():
     return render_template("")
 
 
+@app.route('/rawmaterial')
+def order():
+    return render_template('add_rawmaterials.html')
+
 @app.route('/add_rawmaterials_button', methods=["POST"])
 def  add_rawmaterials():
     conn = sqlite3.connect('file.db')
@@ -57,14 +68,17 @@ def  add_rawmaterials():
     orderid = request.form.get("orderid")
     materials = request.form.get("materials")
     cost = request.form.get("cost")
-    deliverydate = request.form.get("deliverydate")
-    isdelivered = request.form.get("isdelivered")
     
-    c.execute("INSERT INTO rawmaterials VALUES (?, ?, ?, ?, ?, ?)",(customerid, orderid, materials, cost, deliverydate, isdelivered))
+    c.execute("INSERT INTO rawmaterials VALUES (?, ?, ?, ?, ?, ?)",(customerid, orderid, materials, cost))
     conn.commit()
     conn.close()
     
     return render_template("")
+
+
+@app.route('/production')
+def order():
+    return render_template('add_production.html')
 
 
 @app.route('/add_production_button', methods=["POST"])
@@ -86,6 +100,10 @@ def  add_production():
     return render_template("")
 
 
+@app.route('/shipment')
+def order():
+    return render_template('add_shipment.html')
+
 @app.route('/add_shipment_button', methods=["POST"])
 def  add_shipment():
     conn = sqlite3.connect('file.db')
@@ -102,4 +120,3 @@ def  add_shipment():
     conn.close()
     
     return render_template("")
-
