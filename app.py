@@ -1,14 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 import sqlite3
 
 app = Flask(__name__)
 
-# @app.route('/')
-# def index():
-#     title = 'MY FLASK EXP'
-#     return render_template('layout.html')
+@app.route('/')
+def layout():
+    return render_template('layout.html')
 
-@app.route('/add')
+@app.route('/customer')
 def customer():
     return render_template('add_orders.html')
 
@@ -56,7 +55,7 @@ def  add_orders():
 
 
 @app.route('/rawmaterial')
-def order():
+def rawmaterial():
     return render_template('add_rawmaterials.html')
 
 @app.route('/add_rawmaterials_button', methods=["POST"])
@@ -77,7 +76,7 @@ def  add_rawmaterials():
 
 
 @app.route('/production')
-def order():
+def production():
     return render_template('add_production.html')
 
 
@@ -101,7 +100,7 @@ def  add_production():
 
 
 @app.route('/shipment')
-def order():
+def shipment():
     return render_template('add_shipment.html')
 
 @app.route('/add_shipment_button', methods=["POST"])

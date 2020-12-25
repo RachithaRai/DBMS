@@ -2,14 +2,30 @@
 <html lang="en">
     
     <head>
-        {% block head %}
-            <meta charset="UTF-8">
+        <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
             <title>{{title}}</title>
+        {% block head %}
+            
         {% endblock %}
     </head>
 
     <body>
+        <header>
+            <h1>I CANT FIND A NAME</h1>
+        </header>
+          <div class="container blue circleBehind">           
+                <a onclick="window.location.href='/order'">ORDER</a>
+                <a onclick="window.location.href='/rawmaterial'">RAW MATERIAL</a>
+                <a onclick="window.location.href='/production'">PRODUCTION</a>
+                <a onclick="window.location.href='/shipment'">SHIPMENT</a>
+          </div>
+          
+
+          <footer>
+            <span>BOOM</span>
+          </footer>
         {% block body %}
         {% endblock %}
     </body>
