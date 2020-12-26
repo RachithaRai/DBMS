@@ -7,37 +7,43 @@ def init_db():
         # c.execute("DROP TABLE orders")
         # conn.commit()
 
-        c.execute("""   CREATE TABLE IF NOT EXISTS customer (
-                        customerid INTEGER PRIMARY KEY,
+        c.execute("""   CREATE TABLE IF NOT EXISTS client (
+                        clientid INTEGER PRIMARY KEY,
+                        clientusername TEXT,
+                        password TEXT,
                         company TEXT,
                         address TEXT,
                         name TEXT,
                         contact INTEGER,
-                        maild TEXT
+                        mailid TEXT
                 );
                 """)
         conn.commit()
+
+        conn.commit()
+
+
         c.execute("""   CREATE TABLE IF NOT EXISTS orders (
                         orderid INTEGER PRIMARY KEY,
-                        customerid INTEGER,
+                        clientid INTEGER,
                         orderdate TEXT,
                         productname TEXT,
                         productid INTEGER,
                         description TEXT,
                         estimatedcost INTEGER,
                         deadline Text,
-                        FOREIGN KEY(customerid) REFERENCES customer(customerid) ON DELETE CASCADE
+                        FOREIGN KEY(clientid) REFERENCES client(clientid) ON DELETE CASCADE
                 );
                 """)
         conn.commit()
         
 
         c.execute("""   CREATE TABLE IF NOT EXISTS rawmaterials (
-                        customerid INTEGER,
+                        clientid INTEGER,
                         orderid INTEGER,
                         materials TEXT,
                         cost REAL,
-                        FOREIGN(customerid) REFERENCES customer(customerid) ON DELETE CASCADE,
+                        FOREIGN(clientid) REFERENCES client(clientid) ON DELETE CASCADE,
                         FOREIGN KEY(orderid) REFERENCES orders(orderid) ON DELETE CASCADE
                 );
                 """)
@@ -45,14 +51,14 @@ def init_db():
         conn.commit()
 
         c.execute("""  CREATE TABLE IF NOT EXISTS production(
-                        customerid INTEGER,
+                        clientid INTEGER,
                         orderid INTEGER,
                         requireddays INTEGER,
                         startdate TEXT,
                         enddate TEXT,
                         extradays INTEGER,
                         FOREIGN KEY(orderid) REFERENCES orders(orderid) ON DELETE CASCADE,
-                        FOREIGN KEY (customerid) REFERENCES customer(customerid) ON DELETE CASCADE
+                        FOREIGN KEY (clientid) REFERENCES client(clientid) ON DELETE CASCADE
 
 
                 );
@@ -60,12 +66,12 @@ def init_db():
         conn.commit()
 
         c.execute("""   CREATE TABLE IF NOT EXISTS shipment(
-                        customerid INTEGER,
+                        clientid INTEGER,
                         orderid INTEGER,
                         weight REAL,
                         shipping_address TEXT,
                         transportation_type TEXT,
-                        FOREIGN KEY (customerid) REFERENCES customer(customerid) ON DELETE CASCADE,
+                        FOREIGN KEY (clientid) REFERENCES client(clientid) ON DELETE CASCADE,
                         FOREIGN KEY(orderid) REFERENCES orders(orderid) ON DELETE CASCADE
 
                 );

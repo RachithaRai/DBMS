@@ -3,27 +3,94 @@ import sqlite3
 
 app = Flask(__name__)
 
+adminusername = ''
+adminpassword = ''
+
+
 @app.route('/')
 def layout():
     return render_template('layout.html')
 
-@app.route('/customer')
-def customer():
-    return render_template('add_orders.html')
 
-@app.route('/add_customer_button', methods=["POST"])
-def  add_customer():
+@app.route('/signup')
+def client_signup():
+    return render_template('signup.html')
+
+@app.route('/signup_button', methods=["POST"])
+def  clientdetails():
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+    
+    clientusername = request.form.get("clientusername")
+    password = request.form.get("password")
+    name = request.form.get("name")
+    company = request.form.get("company")
+    contact = request.form.get("contact")
+    mailid = request.form.get("mailid")
+    address = request.form.get("address")
+    
+    c.execute("INSERT INTO client (clientusername, password, company, address, name, contact, mailid) VALUES(?, ?, ?, ?, ?, ?, ?)", (clientusername, password, company, address, name, contact, mailid) )
+    conn.commit()
+    conn.close()
+
+    return "Successful"
+
+
+@app.route('/login')
+def clientlogin():
+    return render_template('login.html')
+
+@app.route('/login_button', methods=["POST"])
+def  addclient():
     conn = sqlite3.connect('file.db')
     c = conn.cursor()
 
-    customerid = request.form.get("customerid")
+    clientusername = request.form.get("clientusername")
+    password = request.form.get("password")
+    
+    c.execute("INSERT INTO client VALUES (?, ?)", (clientusername, password))
+    conn.commit()
+    conn.close()
+
+    return "Successful"
+
+
+@app.route('/login')
+def adminlogin():
+    return render_template('login.html')
+
+@app.route('/login_button', methods=["POST"])
+def  admin():
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+
+    adminusername = request.form.get("adminusername")
+    password = request.form.get("password")
+    
+    c.execute("INSERT INTO client VALUES (?, ?)", (adminusername, password))
+    conn.commit()
+    conn.close()
+
+    return "Successful"
+
+
+@app.route('/client')
+def client():
+    return render_template('add_orders.html')
+
+@app.route('/add_client_button', methods=["POST"])
+def  add_client():
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+
+    clientid = request.form.get("clientid")
     company = request.form.get("company")
     address = request.form.get("address")
     name = request.form.get("name")
     contact = request.form.get("contact")
     mailid = request.form.get("mailid")
     
-    c.execute("INSERT INTO customer VALUES (?, ?, ?, ?, ?, ?)", (customerid, company, address, name, contact, mailid))
+    c.execute("INSERT INTO client VALUES (?, ?, ?, ?, ?, ?)", (clientid, company, address, name, contact, mailid))
     conn.commit()
     conn.close()
 
@@ -39,7 +106,7 @@ def  add_orders():
     c = conn.cursor()
 
     orderid = request.form.get("orderid")
-    customerid = request.form.get("customerid")
+    clientid = request.form.get("clientid")
     orderdate = request.form.get("orderdate")
     productname = request.form.get("productname")
     productid = request.form.get("productid")
@@ -47,7 +114,7 @@ def  add_orders():
     estimatedcost = request.form.get("estimatedcost")
     deadline = request.form.get("deadline")
     
-    c.execute("INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?)",(orderid, customerid, orderdate, productname, productid, description, estimatedcost, deadline))
+    c.execute("INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?)",(orderid, clientid, orderdate, productname, productid, description, estimatedcost, deadline))
     conn.commit()
     conn.close()
     
@@ -63,12 +130,12 @@ def  add_rawmaterials():
     conn = sqlite3.connect('file.db')
     c = conn.cursor()
 
-    customerid = request.form.get("customerid")
+    clientid = request.form.get("clientid")
     orderid = request.form.get("orderid")
     materials = request.form.get("materials")
     cost = request.form.get("cost")
     
-    c.execute("INSERT INTO rawmaterials VALUES (?, ?, ?, ?, ?, ?)",(customerid, orderid, materials, cost))
+    c.execute("INSERT INTO rawmaterials VALUES (?, ?, ?, ?, ?, ?)",(clientid, orderid, materials, cost))
     conn.commit()
     conn.close()
     
@@ -85,14 +152,14 @@ def  add_production():
     conn = sqlite3.connect('file.db')
     c = conn.cursor()
 
-    customerid = request.form.get("customerid")
+    clientid = request.form.get("clientid")
     orderid = request.form.get("orderid")
     requireddays = request.form.get("requireddays")
     startdate = request.form.get("startdate")
     enddate = request.form.get("enddate")
     extradays = request.form.get("extradays")
     
-    c.execute("INSERT INTO production VALUES (?, ?, ?, ?, ?, ?)",(customerid, orderid, requireddays, startdate, enddate, extradays))
+    c.execute("INSERT INTO production VALUES (?, ?, ?, ?, ?, ?)",(clientid, orderid, requireddays, startdate, enddate, extradays))
     conn.commit()
     conn.close()
     
@@ -108,13 +175,13 @@ def  add_shipment():
     conn = sqlite3.connect('file.db')
     c = conn.cursor()
 
-    customerid = request.form.get("customerid")
+    clientid = request.form.get("clientid")
     orderid = request.form.get("orderid")
     weight = request.form.get("weight")
     shippingaddress = request.form.get("shippingaddress")
     transportationtype = request.form.get("transportationtype")
     
-    c.execute("INSERT INTO shipment VALUES (?, ?, ?, ?, ?, ?)",(customerid, orderid, weight, shippingaddress, transportationtype))
+    c.execute("INSERT INTO shipment VALUES (?, ?, ?, ?, ?, ?)",(clientid, orderid, weight, shippingaddress, transportationtype))
     conn.commit()
     conn.close()
     
