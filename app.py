@@ -13,7 +13,7 @@ def option(cat):
 
 @app.route('/')
 def layout():
-    return render_template('login.html')
+    return render_template('layout.html')#login
 
 
 @app.route('/signup')

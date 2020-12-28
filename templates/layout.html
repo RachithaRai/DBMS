@@ -2,29 +2,24 @@
 <html lang="en">  
     <head>
         <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
-            <title>{{title}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+        <title>{{title}}</title>
+    </head>
         {% block head %}
             
         {% endblock %}
-    </head>
+    
 
     <body>
-        <div>
-            <header>
-                <div>
-                    <h1>SHIPLANCE</h1>
-                </div>
-                <div>
-                    <ul>
-                        <li><a href='/order'></a></li>
-                        <li><a href='/rawmaterial'></a></li>
-                        <li><a href='/production'></a></li>
-                        <li><a href='/shipment'></a></li>                                    
-                    </ul>
-                </div>
-            </header>
+        <div class="navbar">           
+            <h1>SHIPLANCE</h1>
+            <div class="links">
+                <a onclick="window.location.href='/option/orders'">Order</a>
+                <a onclick="window.location.href='/option/rawmaterial'">Rawmaterial</a>
+                <a onclick="window.location.href='/option/production'">Production</a>
+                <a onclick="window.location.href='/option/shipment'">Shipment</a>                                    
+            </div>
         </div>
 
 
