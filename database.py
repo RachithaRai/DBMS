@@ -28,7 +28,6 @@ def init_db():
                         clientid INTEGER,
                         orderdate TEXT,
                         productname TEXT,
-                        productid INTEGER,
                         description TEXT,
                         estimatedcost INTEGER,
                         deadline Text,

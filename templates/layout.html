@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-    
+<html lang="en">  
     <head>
         <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,18 +11,26 @@
     </head>
 
     <body>
-        <header>
-            <h1>I CANT FIND A NAME</h1>
-        </header>
-          <div class="container blue circleBehind">           
-                <a onclick="window.location.href='/order'">ORDER</a>
-                <a onclick="window.location.href='/rawmaterial'">RAW MATERIAL</a>
-                <a onclick="window.location.href='/production'">PRODUCTION</a>
-                <a onclick="window.location.href='/shipment'">SHIPMENT</a>
-          </div>
-          <footer>
+        <div>
+            <header>
+                <div>
+                    <h1>SHIPLANCE</h1>
+                </div>
+                <div>
+                    <ul>
+                        <li><a href='/order'></a></li>
+                        <li><a href='/rawmaterial'></a></li>
+                        <li><a href='/production'></a></li>
+                        <li><a href='/shipment'></a></li>                                    
+                    </ul>
+                </div>
+            </header>
+        </div>
+
+
+        <footer>
             <span>BOOM</span>
-          </footer>
+        </footer>
         {% block body %}
         {% endblock %}
     </body>

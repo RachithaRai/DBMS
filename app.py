@@ -7,6 +7,10 @@ username = 'admin'
 password = 'admin'
 
 
+@app.route('/option/<string:cat>')
+def option(cat):
+    return render_template('option.html', option=cat)
+
 @app.route('/')
 def layout():
     return render_template('login.html')
@@ -63,7 +67,7 @@ def admin():
     adminpassword = request.form.get("password")
    
     if adminusername==username and adminpassword==password:
-        return render_template('layout.html')
+        return render_template('category.html')
 
 @app.route('/client')
 def client():
@@ -87,7 +91,7 @@ def  add_client():
 
     return "Successful"
 
-@app.route('/order')
+@app.route('/orders')
 def order():
     return render_template('add_orders.html')
 
@@ -104,25 +108,21 @@ def  add_orders():
     description = request.form.get("description")
     estimatedcost = request.form.get("estimatedcost")
     deadline = request.form.get("deadline")
-    
-    c.execute("INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?, ?, ?)",(orderid, clientid, orderdate, productname, productid, description, estimatedcost, deadline))
 
-    orders_query = c.execute("""SELECT * FROM orders""").fetchall()
+    c.execute("INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?, ?, ?)",(orderid, clientid, orderdate, productname, productid, description, estimatedcost, deadline)) 
 
     conn.commit()
     conn.close()
-    
-    return render_template("orders.html", orders=orders_query)#tatti
-    #return render_template('/vieworders')
+    return render_template("orders.html")
 
-# @app.route('/vieworders')
-# def render_all_orders():
-#     with sqlite3.connect('file.db') as conn:
-#         c = conn.cursor()
+@app.route('/vieworders')
+def render_all_orders():
+    with sqlite3.connect('file.db') as conn:
+        c = conn.cursor()
 
-#         orders_query = c.execute("""SELECT * FROM orders""").fetchall()
+        orders_query = c.execute("""SELECT * FROM orders""").fetchall()
 
-#         return render_template("orders.html", orders=orders_query)#tatti
+        return render_template("orders.html", orders=orders_query)
 
 
 @app.route('/rawmaterial')
