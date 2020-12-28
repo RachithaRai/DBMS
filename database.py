@@ -43,14 +43,14 @@ def init_db():
                         orderid INTEGER,
                         materials TEXT,
                         cost REAL,
-                        FOREIGN(clientid) REFERENCES client(clientid) ON DELETE CASCADE,
+                        FOREIGN KEY(clientid) REFERENCES client(clientid) ON DELETE CASCADE,
                         FOREIGN KEY(orderid) REFERENCES orders(orderid) ON DELETE CASCADE
                 );
                 """)
 
         conn.commit()
 
-        c.execute("""  CREATE TABLE IF NOT EXISTS production(
+        c.execute("""   CREATE TABLE IF NOT EXISTS production(
                         clientid INTEGER,
                         orderid INTEGER,
                         requireddays INTEGER,

@@ -1,15 +1,15 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, redirect
 import sqlite3
 
 app = Flask(__name__)
 
-adminusername = ''
-adminpassword = ''
+username = 'admin'
+password = 'admin'
 
 
 @app.route('/')
 def layout():
-    return render_template('layout.html')
+    return render_template('login.html')
 
 
 @app.route('/signup')
@@ -40,7 +40,7 @@ def  clientdetails():
 def clientlogin():
     return render_template('login.html')
 
-@app.route('/login_button', methods=["POST"])
+@app.route('/client_login_button', methods=["POST"])
 def  addclient():
     conn = sqlite3.connect('file.db')
     c = conn.cursor()
@@ -54,25 +54,16 @@ def  addclient():
 
     return "Successful"
 
-
-@app.route('/login')
-def adminlogin():
-    return render_template('login.html')
-
-@app.route('/login_button', methods=["POST"])
-def  admin():
+@app.route('/admin_login_button', methods=["POST"])
+def admin():
     conn = sqlite3.connect('file.db')
     c = conn.cursor()
 
     adminusername = request.form.get("adminusername")
-    password = request.form.get("password")
-    
-    c.execute("INSERT INTO client VALUES (?, ?)", (adminusername, password))
-    conn.commit()
-    conn.close()
-
-    return "Successful"
-
+    adminpassword = request.form.get("password")
+   
+    if adminusername==username and adminpassword==password:
+        return render_template('layout.html')
 
 @app.route('/client')
 def client():
@@ -114,11 +105,24 @@ def  add_orders():
     estimatedcost = request.form.get("estimatedcost")
     deadline = request.form.get("deadline")
     
-    c.execute("INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?)",(orderid, clientid, orderdate, productname, productid, description, estimatedcost, deadline))
+    c.execute("INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?, ?, ?)",(orderid, clientid, orderdate, productname, productid, description, estimatedcost, deadline))
+
+    orders_query = c.execute("""SELECT * FROM orders""").fetchall()
+
     conn.commit()
     conn.close()
     
-    return render_template("")
+    return render_template("orders.html", orders=orders_query)#tatti
+    #return render_template('/vieworders')
+
+# @app.route('/vieworders')
+# def render_all_orders():
+#     with sqlite3.connect('file.db') as conn:
+#         c = conn.cursor()
+
+#         orders_query = c.execute("""SELECT * FROM orders""").fetchall()
+
+#         return render_template("orders.html", orders=orders_query)#tatti
 
 
 @app.route('/rawmaterial')
@@ -135,7 +139,7 @@ def  add_rawmaterials():
     materials = request.form.get("materials")
     cost = request.form.get("cost")
     
-    c.execute("INSERT INTO rawmaterials VALUES (?, ?, ?, ?, ?, ?)",(clientid, orderid, materials, cost))
+    c.execute("INSERT INTO rawmaterials VALUES (?, ?, ?, ?)",(clientid, orderid, materials, cost))
     conn.commit()
     conn.close()
     
