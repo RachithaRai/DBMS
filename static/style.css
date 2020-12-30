@@ -8,6 +8,32 @@ html, body
     /* overflow-y: hidden; */
 }
 
+.cards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 200px 100px 200px 100px;
+    
+
+}
+
+.card{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(220, 220, 221);
+    border-radius: 13px;
+    padding: 65px;
+    margin: 25px;
+    /* margin: 0px 30px 0px 0px; */
+    height: 45px;
+    width: 90px;
+}
+
+p{
+    margin: -10px 30px 30px 0px;
+}
+
 div.navbar{
     position: absolute;
     display: flex;
@@ -22,7 +48,7 @@ header, footer
     margin: 0;
 	padding: 20px 20px;
 	text-align: center;
-    background: #555;
+    background: rgb(208, 208, 208);
 }
 
 header h1
@@ -35,7 +61,7 @@ header h1
 
 footer span
 {
-  color: #AAA;
+  color:rgb(208, 208, 208);
 }
 
 div.container
@@ -63,7 +89,7 @@ div.container a
 
 body
 {
-    background: #97b6d0;
+    background: white;
    
 }
 

@@ -11,11 +11,13 @@ password = 'admin'
 def option(cat):
     return render_template('option.html', option=cat)
 
+
 @app.route('/')
 def layout():
-    return render_template('layout.html')#login
+    return render_template('login.html')#login
+# ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
-
+# ```````````````````````````````````SIGNUP```````````````````````````````````````````````````````````````````
 @app.route('/signup')
 def client_signup():
     return render_template('signup.html')
@@ -38,8 +40,9 @@ def  clientdetails():
     conn.close()
 
     return "Successful"
+# ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
-
+# ```````````````````````````````````LOGIN```````````````````````````````````````````````````````````````````
 @app.route('/login')
 def clientlogin():
     return render_template('login.html')
@@ -90,7 +93,9 @@ def  add_client():
     conn.close()
 
     return "Successful"
+# ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
+# ``````````````````````````````````````ORDER````````````````````````````````````````````````````````````````
 @app.route('/orders')
 def order():
     return render_template('add_orders.html')
@@ -123,8 +128,9 @@ def render_all_orders():
         orders_query = c.execute("""SELECT * FROM orders""").fetchall()
 
         return render_template("orders.html", orders=orders_query)
+# ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
-
+# ````````````````````````````RAWMATERIAL``````````````````````````````````````````
 @app.route('/rawmaterial')
 def rawmaterial():
     return render_template('add_rawmaterials.html')
@@ -138,18 +144,29 @@ def  add_rawmaterials():
     orderid = request.form.get("orderid")
     materials = request.form.get("materials")
     cost = request.form.get("cost")
-    
+    print(materials)
+
+
     c.execute("INSERT INTO rawmaterials VALUES (?, ?, ?, ?)",(clientid, orderid, materials, cost))
     conn.commit()
     conn.close()
     
-    return render_template("")
+    return render_template("rawmaterials.html")
 
+@app.route('/viewrawmaterials')
+def render_all_rawmaterials():
+    with sqlite3.connect('file.db') as conn:
+        c = conn.cursor()
 
+        rawmaterials_query = c.execute("""SELECT * FROM rawmaterials""").fetchall()
+
+        return render_template("rawmaterials.html", rawmaterials=rawmaterials_query)
+# ``````````````````````````````````````````````````````````````````````````````````````
+
+# `````````````````````````````````````````PRODUCTION```````````````````````````````````````````````````````````````
 @app.route('/production')
 def production():
     return render_template('add_production.html')
-
 
 @app.route('/add_production_button', methods=["POST"])
 def  add_production():
@@ -167,9 +184,19 @@ def  add_production():
     conn.commit()
     conn.close()
     
-    return render_template("")
+    return render_template("productions.html")
 
+@app.route('/viewproductions')
+def render_all_productions():
+    with sqlite3.connect('file.db') as conn:
+        c = conn.cursor()
 
+        productions_query = c.execute("""SELECT * FROM production""").fetchall()
+
+        return render_template("productions.html", productions=productions_query)
+# ``````````````````````````````````````````````````````````````````````````````````````````````````````
+
+# ```````````````````````````````````````````SHIPMENT```````````````````````````````````````````````````````````
 @app.route('/shipment')
 def shipment():
     return render_template('add_shipment.html')
@@ -189,4 +216,14 @@ def  add_shipment():
     conn.commit()
     conn.close()
     
-    return render_template("")
+    return render_template("shipments.html")
+
+@app.route('/viewshipments')
+def render_all_shipments():
+    with sqlite3.connect('file.db') as conn:
+        c = conn.cursor()
+
+        shipments_query = c.execute("""SELECT * FROM shipment""").fetchall()
+
+        return render_template("shipments.html", shipments=shipments_query)
+# ``````````````````````````````````````````````````````````````````````````````````````````````````````

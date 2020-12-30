@@ -20,8 +20,6 @@ def init_db():
                 """)
         conn.commit()
 
-        conn.commit()
-
 
         c.execute("""   CREATE TABLE IF NOT EXISTS orders (
                         orderid INTEGER PRIMARY KEY,
@@ -49,6 +47,7 @@ def init_db():
 
         conn.commit()
 
+
         c.execute("""   CREATE TABLE IF NOT EXISTS production(
                         clientid INTEGER,
                         orderid INTEGER,
@@ -63,6 +62,7 @@ def init_db():
                 );
                 """)
         conn.commit()
+
 
         c.execute("""   CREATE TABLE IF NOT EXISTS shipment(
                         clientid INTEGER,

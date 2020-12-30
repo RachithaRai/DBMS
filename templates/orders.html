@@ -13,19 +13,18 @@
     <div style="text-align: center; margin: 170px 40%;" >
         <table style="border: 1px solid black; text-align: left;border-collapse: collapse;">
             <tr style="border: 1px solid black;">
-                <th style="border: 1px solid black;">orderid</th>
-                <th style="border: 1px solid black;">clientid</th>
-                <th style="border: 1px solid black;">orderdate</th>
-                <th style="border: 1px solid black;">productname</th>
-                <th style="border: 1px solid black;">productid</th>
-                <th style="border: 1px solid black;">description</th>
-                <th style="border: 1px solid black;">estimatedcost</th>
-                <th style="border: 1px solid black;">deadline</th>
-                <th style="border: 1px solid black;">Action</th>
+                <th style="border: 1px solid black;">Order Id</th>
+                <th style="border: 1px solid black;">Client Id</th>
+                <th style="border: 1px solid black;">Order Date</th>
+                <th style="border: 1px solid black;">Product Name</th>
+                <th style="border: 1px solid black;">Product Id</th>
+                <th style="border: 1px solid black;">Description</th>
+                <th style="border: 1px solid black;">Estimated Cost</th>
+                <th style="border: 1px solid black;">Deadline</th>
             </tr>
     
             {% for order in orders %} 
-                <form action="/delete_student/{{order[1]}}" method="POST">
+                <form action="" method="POST">
                     <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;">{{order[0]}}</td>
                         <td style="border: 1px solid black;">{{order[1]}}</td>
@@ -35,7 +34,6 @@
                         <td style="border: 1px solid black;">{{order[5]}}</td>
                         <td style="border: 1px solid black;">{{order[6]}}</td>
                         <td style="border: 1px solid black;">{{order[7]}}</td>
-                        <td style="border: 1px solid black;"><input type="submit" value="DELETE"></td>
                     </tr>
                 </form>
             {% endfor %}
