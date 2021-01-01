@@ -122,12 +122,54 @@ def  add_orders():
 
 @app.route('/vieworders')
 def render_all_orders():
-    with sqlite3.connect('file.db') as conn:
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+
+    orders_query = c.execute("""SELECT * FROM orders""").fetchall()
+
+    return render_template("orders.html", orders=orders_query)
+
+
+@app.route('/editorders/<int:orderid>')
+def editorder(orderid):
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+
+    post = c.execute("SELECT * FROM orders WHERE orderid=?", (orderid, )).fetchone() 
+    #   print(post)
+    return render_template('editorders.html', posts=post)
+
+@app.route('/update/<int:orderid>', methods=['POST','GET'])
+def updateorder(orderid):
+    if request.method == "POST":
+        orderid = request.form["orderid"]
+        clientid = request.form["clientid"]
+        orderdate = request.form["orderdate"]
+        productname = request.form["productname"]
+        productid = request.form["productid"]
+        description = request.form["description"]
+        estimatedcost = request.form["estimatedcost"]
+        deadline = request.form["deadline"]
+
+        t = (orderid,clientid,orderdate,productname,productid,description, estimatedcost, deadline)
+        print(orderid,clientid)
+
+        conn = sqlite3.connect('file.db')
         c = conn.cursor()
+        c.execute("""UPDATE orders 
+                     SET 
+                     orderid=?,
+                     clientid=?,
+                     orderdate=?,
+                     productname=?,
+                     productid=?
+                     description=?
+                     estimatedcost=?
+                     deadline=?
+                     WHERE orders.orderid=?""", t)
 
-        orders_query = c.execute("""SELECT * FROM orders""").fetchall()
-
-        return render_template("orders.html", orders=orders_query)
+        return redirect('/vieworders')
+    return redirect('/')
 # ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
 # ````````````````````````````RAWMATERIAL``````````````````````````````````````````
