@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+    <title>Document</title>
+
+
+</head>
+<body>
+
+    <header>
+        <h1>PLACE ORDER</h1>
+    </header> 
+    <!-- <h1 style="text-align: center; font-size: 25px; margin-top: 10%">PLACE ORDERS</h1> -->
+    
+    <form style="text-align: center; margin-top: 6%;" action='/updateorder/{{posts[0]}}' method="POST">
+        <div style="padding: 20px 0;">
+            <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="orderid" value="{{posts[0]}}"
+            readonly>
+        </div>
+        <div style="padding: 10px 0;">
+            <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="clientid" value="{{posts[1]}}">
+        </div>
+        <div style="padding: 20px 0;">
+            <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="orderdate" value="{{posts[2]}}">
+        </div>
+        <div style="padding: 20px 0;">
+            <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="productname" value="{{posts[3]}}">
+        </div>
+        <div style="padding: 20px 0;">
+            <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="productid" value="{{posts[4]}}">
+        </div>
+        <div style="padding: 20px 0;">
+            <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="description" value="{{posts[5]}}">
+        </div>
+        <div style="padding: 20px 0;">
+            <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="estimatedcost" value="{{posts[6]}}">
+        </div>
+        <div style="padding: 20px 0;">
+            <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="deadline" value="{{posts[7]}}">
+        </div>
+       
+        <button style="margin-top: 30px;" type="submit" value="Submit">Submit</button>
+    </form>
+    <footer style="background-color: #212121; text-align: center; margin-top: 14%;">
+        <p style="color: white; padding: 15px 0 ;"></p>
+    </footer>
+</body>
+</html>

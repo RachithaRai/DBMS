@@ -1,0 +1,48 @@
+<!-- {% extends "layout.html" %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+    <title>Document</title>
+</head>
+<!-- {% block body %} -->
+<body>
+    <h1 style="text-align: center; margin-top: 107px;">Orders Details</h1>
+    <div style="text-align: center; margin: 170px 40%;" >
+        <table style="border: 1px solid black; text-align: left;border-collapse: collapse;">
+            <tr style="border: 1px solid black;">
+                <th style="border: 1px solid black;">Order Id</th>
+                <th style="border: 1px solid black;">Client Id</th>
+                <th style="border: 1px solid black;">Order Date</th>
+                <th style="border: 1px solid black;">Product Name</th>
+                <th style="border: 1px solid black;">Product Id</th>
+                <th style="border: 1px solid black;">Description</th>
+                <th style="border: 1px solid black;">Estimated Cost</th>
+                <th style="border: 1px solid black;">Deadline</th>
+                <!-- <th style="border: 1px solid black;">ACTION</th> -->
+            </tr>
+    
+            {% for order in orders %} 
+                <form action="" method="POST">
+                    <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;">{{order[0]}}</td>
+                        <td style="border: 1px solid black;">{{order[1]}}</td>
+                        <td style="border: 1px solid black;">{{order[2]}}</td>
+                        <td style="border: 1px solid black;">{{order[3]}}</td>
+                        <td style="border: 1px solid black;">{{order[4]}}</td>
+                        <td style="border: 1px solid black;">{{order[5]}}</td>
+                        <td style="border: 1px solid black;">{{order[6]}}</td>
+                        <td style="border: 1px solid black;">{{order[7]}}</td>
+                        <td style="border: 1px solid black;"><a href="/editorders/{{order[0]}}">UPDATE</a></td>
+                        <td style="border: 1px solid black;"><a href=""><input type="submit" value="DELETE"></a></td>
+                    </tr>
+                </form>
+            {% endfor %}
+    
+        </table>
+    </div>
+</body>
+<!-- {% endblock %} -->
+</html>

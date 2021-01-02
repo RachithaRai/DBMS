@@ -129,6 +129,13 @@ def render_all_orders():
 
     return render_template("orders.html", orders=orders_query)
 
+@app.route('/editorders')
+def render_editorders():
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+    orders_query = c.execute("""SELECT * FROM orders""").fetchall()
+
+    return render_template("editorders.html", orders=orders_query)
 
 @app.route('/editorders/<int:orderid>')
 def editorder(orderid):
@@ -137,39 +144,42 @@ def editorder(orderid):
 
     post = c.execute("SELECT * FROM orders WHERE orderid=?", (orderid, )).fetchone() 
     #   print(post)
-    return render_template('editorders.html', posts=post)
+    return render_template('updateorder.html', posts=post)
 
-@app.route('/update/<int:orderid>', methods=['POST','GET'])
+@app.route('/updateorder/<int:orderid>', methods=["POST"])
 def updateorder(orderid):
-    if request.method == "POST":
-        orderid = request.form["orderid"]
-        clientid = request.form["clientid"]
-        orderdate = request.form["orderdate"]
-        productname = request.form["productname"]
-        productid = request.form["productid"]
-        description = request.form["description"]
-        estimatedcost = request.form["estimatedcost"]
-        deadline = request.form["deadline"]
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+    # if request.method == "POST":
+    orderid = request.form.get("orderid")
+    clientid = request.form.get("clientid")
+    orderdate = request.form.get("orderdate")
+    productname = request.form.get("productname")
+    productid = request.form.get("productid")
+    description = request.form.get("description")
+    estimatedcost = request.form.get("estimatedcost")
+    deadline = request.form.get("deadline")
 
-        t = (orderid,clientid,orderdate,productname,productid,description, estimatedcost, deadline)
-        print(orderid,clientid)
+    t = (orderid,clientid,orderdate,productname,productid,description,estimatedcost,deadline,orderid)
+    # print(orderid,clientid)
 
-        conn = sqlite3.connect('file.db')
-        c = conn.cursor()
-        c.execute("""UPDATE orders 
+        
+    c.execute("""UPDATE orders 
                      SET 
                      orderid=?,
                      clientid=?,
                      orderdate=?,
                      productname=?,
-                     productid=?
-                     description=?
-                     estimatedcost=?
+                     productid=?,
+                     description=?,
+                     estimatedcost=?,
                      deadline=?
-                     WHERE orders.orderid=?""", t)
+                     WHERE orderid=?""", t)
+    conn.commit()
+    conn.close()
 
-        return redirect('/vieworders')
-    return redirect('/')
+    return redirect('/vieworders')
+# return redirect('/')
 # ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
 # ````````````````````````````RAWMATERIAL``````````````````````````````````````````
