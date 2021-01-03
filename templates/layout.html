@@ -6,28 +6,40 @@
         <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
         <title>{{title}}</title>
     </head>
-        {% block head %}
-            
-        {% endblock %}
     
-
+        {% block head %}          
+        {% endblock %}    
+    
     <body>
+        
         <div class="navbar">           
-            <h1>SHIPLANCE</h1>
+            <div class="name"><h2>SHIPLANCE</h2></div>
             <div class="links">
-                <a onclick="window.location.href='/option/orders'">Order</a>
-                <a onclick="window.location.href='/option/rawmaterial'">Rawmaterial</a>
-                <a onclick="window.location.href='/option/production'">Production</a>
-                <a onclick="window.location.href='/option/shipment'">Shipment</a>                                    
+                <ul class="list">
+                    <li><a class="items home" href="">HOME</a></li>
+                    <li><a class="items" href="/signin">SIGN IN</a></li>
+                    <li><a class="items" href="">SIGN UP</a></li>
+                    <li><a class="items" href="">ABOUT</a></li>
+                </ul>                                
             </div>
         </div>
 
-
-        <footer>
-            <span>BOOM</span>
-        </footer>
         {% block body %}
-        {% endblock %}
+        {% endblock %} 
+
+    
+        
+        <div class="footer">>            
+            <div class="copyright">
+                <p>
+                    <!-- Copyright © 2021 All rights reserved -->
+                    me for footer
+                </p>
+            </div>
+        </div>  
+
+        
+
     </body>
 
 </html>

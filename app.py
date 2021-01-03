@@ -14,7 +14,12 @@ def option(cat):
 
 @app.route('/')
 def layout():
-    return render_template('login.html')#login
+    return render_template('layout.html')#login
+
+# @app.route('/signin')
+# def signin():
+#     return render_template('signin.html')
+
 # ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
 # ```````````````````````````````````SIGNUP```````````````````````````````````````````````````````````````````
@@ -43,9 +48,9 @@ def  clientdetails():
 # ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
 # ```````````````````````````````````LOGIN```````````````````````````````````````````````````````````````````
-@app.route('/login')
+@app.route('/signin')
 def clientlogin():
-    return render_template('login.html')
+    return render_template('signin.html')
 
 @app.route('/client_login_button', methods=["POST"])
 def  addclient():
@@ -161,9 +166,7 @@ def updateorder(orderid):
     deadline = request.form.get("deadline")
 
     t = (orderid,clientid,orderdate,productname,productid,description,estimatedcost,deadline,orderid)
-    # print(orderid,clientid)
-
-        
+    # print(orderid,clientid)       
     c.execute("""UPDATE orders 
                      SET 
                      orderid=?,
