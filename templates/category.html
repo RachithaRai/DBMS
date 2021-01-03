@@ -6,14 +6,53 @@
 
         {% block body %}
         <div class="cards">
-            <div class="card">
-                <p>ORDER</p>
-                <a href="/orders"><img src="https://img.icons8.com/material-rounded/34/000000/add-property.png"/></a> 
-                <a href="/editorders"><img src="https://img.icons8.com/fluent-systems-filled/34/000000/day-view.png"/></a>
-                <!-- <a href="/editorders/"><img src="https://img.icons8.com/material-rounded/24/000000/edit--v1.png"/></a> -->
-                
+            
+            <div class= "card1">
+                <div class="card">
+                    <h3>ORDER</h3>
+                    <img src="https://img.icons8.com/pastel-glyph/64/000000/purchase-order.png"/> 
+                </div>
+                <div class="button">
+                    <button class ="optionbutton" onclick="window.location.href='/editorders'">EDIT</button>
+                    <button class ="optionbutton" onclick="window.location.href='/editorders'">VIEW</button>
+                </div>
             </div>
 
+            <div class= "card1">
+                <div class="card">
+                    <h3>RAWMATERIAL</h3>
+                    <img src="https://img.icons8.com/pastel-glyph/64/000000/purchase-order.png"/> 
+                </div>
+                <div class="button">
+                    <button class ="optionbutton" onclick="window.location.href='/editorders'">EDIT</button>
+                    <button class ="optionbutton" onclick="window.location.href='/editorders'">VIEW</button>
+                </div>
+            </div>
+
+            <div class= "card1">
+                <div class="card">
+                    <h3>PRODUCTION</h3>
+                    <img src="https://img.icons8.com/pastel-glyph/64/000000/purchase-order.png"/> 
+                </div>
+                <div class="button">
+                    <button class ="optionbutton" onclick="window.location.href='/editorders'">EDIT</button>
+                    <button class ="optionbutton" onclick="window.location.href='/editorders'">VIEW</button>
+                </div>
+            </div>
+
+            <div class= "card1">
+                <div class="card">
+                    <h3>SHIPMENT</h3>
+                    <img src="https://img.icons8.com/pastel-glyph/64/000000/purchase-order.png"/> 
+                </div>
+                <div class="button">
+                    <button class ="optionbutton" onclick="window.location.href='/editorders'">EDIT</button>
+                    <button class ="optionbutton" onclick="window.location.href='/editorders'">VIEW</button>
+                </div>
+            </div>
+
+
+<!-- 
             <div class="card">
                 <p>RAWMATERIAL</p>
                 <a href="/rawmaterial"><img src="https://img.icons8.com/material-rounded/34/000000/add-property.png"/></a> 
@@ -30,7 +69,7 @@
                 <p>SHIPMENT</p>
                 <a href="/shipment"><img src="https://img.icons8.com/material-rounded/34/000000/add-property.png"/></a> 
                 <a href="/viewshipments"><img src="https://img.icons8.com/fluent-systems-filled/34/000000/day-view.png"/></a>
-            </div>
+            </div> -->
         </div>
         {% endblock %}
     

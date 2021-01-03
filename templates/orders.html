@@ -10,30 +10,30 @@
 <!-- {% block body %} -->
 <body>
     <h1 style="text-align: center; margin-top: 107px;">Orders Details</h1>
-    <div style="text-align: center; margin: 170px 40%;" >
-        <table style="border: 1px solid black; text-align: left;border-collapse: collapse;">
-            <tr style="border: 1px solid black;">
-                <th style="border: 1px solid black;">Order Id</th>
-                <th style="border: 1px solid black;">Client Id</th>
-                <th style="border: 1px solid black;">Order Date</th>
-                <th style="border: 1px solid black;">Product Name</th>
-                <th style="border: 1px solid black;">Product Id</th>
-                <th style="border: 1px solid black;">Description</th>
-                <th style="border: 1px solid black;">Estimated Cost</th>
-                <th style="border: 1px solid black;">Deadline</th>
+    <div>
+        <table>
+            <tr>
+                <th>Order Id</th>
+                <th>Client Id</th>
+                <th>Order Date</th>
+                <th>Product Name</th>
+                <th>Product Id</th>
+                <th>Description</th>
+                <th>Estimated Cost</th>
+                <th>Deadline</th>
             </tr>
     
             {% for order in orders %} 
                 <form action="" method="POST">
                     <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">{{order[0]}}</td>
-                        <td style="border: 1px solid black;">{{order[1]}}</td>
-                        <td style="border: 1px solid black;">{{order[2]}}</td>
-                        <td style="border: 1px solid black;">{{order[3]}}</td>
-                        <td style="border: 1px solid black;">{{order[4]}}</td>
-                        <td style="border: 1px solid black;">{{order[5]}}</td>
-                        <td style="border: 1px solid black;">{{order[6]}}</td>
-                        <td style="border: 1px solid black;">{{order[7]}}</td>
+                        <td>{{order[0]}}</td>
+                        <td>{{order[1]}}</td>
+                        <td>{{order[2]}}</td>
+                        <td>{{order[3]}}</td>
+                        <td>{{order[4]}}</td>
+                        <td>{{order[5]}}</td>
+                        <td>{{order[6]}}</td>
+                        <td>{{order[7]}}</td>
                     </tr>
                 </form>
             {% endfor %}
