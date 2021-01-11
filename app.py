@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, session
 import sqlite3
 
 app = Flask(__name__)
 
-username = 'admin'
-password = 'admin'
+app.secret_key = ('secret key')
+
+ausername = 'admin'
+apassword = 'admin'
 
 
 @app.route('/option/<string:cat>')
@@ -14,7 +16,7 @@ def option(cat):
 
 @app.route('/')
 def layout():
-    return render_template('layout.html')#login
+    return render_template('layout.html')#login layout
 
 # @app.route('/signin')
 # def signin():
@@ -23,6 +25,11 @@ def layout():
 # ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
 # ```````````````````````````````````SIGNUP```````````````````````````````````````````````````````````````````
+# @app.route('/category')
+# def category():
+#     return render_template('category.html')
+
+
 @app.route('/signup')
 def client_signup():
     return render_template('signup.html')
@@ -49,40 +56,73 @@ def  clientdetails():
 
 # ```````````````````````````````````LOGIN```````````````````````````````````````````````````````````````````
 @app.route('/signin')
-def clientlogin():
+def signin():
     return render_template('signin.html')
 
-@app.route('/client_login_button', methods=["POST"])
-def  addclient():
-    conn = sqlite3.connect('file.db')
-    c = conn.cursor()
+# @app.route('/client_login_button', methods=["POST"])
+# def  addclient():
+#     conn = sqlite3.connect('file.db')
+#     c = conn.cursor()
 
-    clientusername = request.form.get("clientusername")
-    password = request.form.get("password")
+#     clientusername = request.form.get("clientusername")
+#     password = request.form.get("password")
     
-    c.execute("INSERT INTO client VALUES (?, ?)", (clientusername, password))
-    conn.commit()
-    conn.close()
+#     c.execute("INSERT INTO client VALUES (?, ?)", (clientusername, password))
+#     conn.commit()
+#     conn.close()
 
-    return "Successful"
+#     return "Successful"
 
-@app.route('/admin_login_button', methods=["POST"])
+
+
+@app.route('/admin_login_button', methods=["POST", "GET"])
 def admin():
     conn = sqlite3.connect('file.db')
     c = conn.cursor()
 
-    adminusername = request.form.get("adminusername")
+    user = request.form.get("adminusername")
     adminpassword = request.form.get("password")
-   
-    if adminusername==username and adminpassword==password:
+ 
+
+    post = c.execute("SELECT * FROM client WHERE clientusername=? and password=?", (user, adminpassword)).fetchone() 
+
+    if user == ausername and adminpassword == apassword:
+        session['admin'] = user
+        print(session['admin'])
         return render_template('category.html')
+    elif post != None:
+        session['client'] = user
+        print(session['client'])
+        return 'display'
+    else:
+        return'nodata'
+    # if 'user' in session:
+    #     user = session['user']
+    #     return render_template('category.html')
+    
+    
+@app.route('/user')
+def user():    
+    if 'user' in session:
+        user = session['user']
+        return render_template('category.html')
+    else:
+        return redirect('/signin')
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+
 
 @app.route('/client')
 def client():
     return render_template('add_orders.html')
 
-@app.route('/add_client_button', methods=["POST"])
+@app.route('/add_client')
 def  add_client():
+    return render_template('add_client.html')
+@app.route('/add_client_button', methods=["POST"])
+def  add_client_button():
     conn = sqlite3.connect('file.db')
     c = conn.cursor()
 
@@ -92,8 +132,11 @@ def  add_client():
     name = request.form.get("name")
     contact = request.form.get("contact")
     mailid = request.form.get("mailid")
+    username = request.form.get("username")
+    password = request.form.get("password")
+
     
-    c.execute("INSERT INTO client VALUES (?, ?, ?, ?, ?, ?)", (clientid, company, address, name, contact, mailid))
+    c.execute("INSERT INTO client VALUES (?, ?, ?, ?, ?, ?, ?,?)", (clientid, username, password, company, address, name, contact, mailid))
     conn.commit()
     conn.close()
 
@@ -101,7 +144,7 @@ def  add_client():
 # ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
 # ``````````````````````````````````````ORDER````````````````````````````````````````````````````````````````
-@app.route('/orders')
+@app.route('/addorders')
 def order():
     return render_template('add_orders.html')
 
@@ -114,16 +157,15 @@ def  add_orders():
     clientid = request.form.get("clientid")
     orderdate = request.form.get("orderdate")
     productname = request.form.get("productname")
-    productid = request.form.get("productid")
     description = request.form.get("description")
     estimatedcost = request.form.get("estimatedcost")
     deadline = request.form.get("deadline")
 
-    c.execute("INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?, ?, ?)",(orderid, clientid, orderdate, productname, productid, description, estimatedcost, deadline)) 
+    c.execute("INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?, ?)",(orderid, clientid, orderdate, productname, description, estimatedcost, deadline)) 
 
     conn.commit()
     conn.close()
-    return render_template("orders.html")
+    return redirect('/editorders')
 
 @app.route('/vieworders')
 def render_all_orders():
@@ -160,12 +202,11 @@ def updateorder(orderid):
     clientid = request.form.get("clientid")
     orderdate = request.form.get("orderdate")
     productname = request.form.get("productname")
-    productid = request.form.get("productid")
     description = request.form.get("description")
     estimatedcost = request.form.get("estimatedcost")
     deadline = request.form.get("deadline")
 
-    t = (orderid,clientid,orderdate,productname,productid,description,estimatedcost,deadline,orderid)
+    t = (orderid,clientid,orderdate,productname,description,estimatedcost,deadline,orderid)
     # print(orderid,clientid)       
     c.execute("""UPDATE orders 
                      SET 
@@ -173,7 +214,6 @@ def updateorder(orderid):
                      clientid=?,
                      orderdate=?,
                      productname=?,
-                     productid=?,
                      description=?,
                      estimatedcost=?,
                      deadline=?
@@ -181,12 +221,24 @@ def updateorder(orderid):
     conn.commit()
     conn.close()
 
-    return redirect('/vieworders')
+    return redirect('/editorders')
 # return redirect('/')
+
+@app.route('/deleteorder/<int:orderid>', methods=['POST', 'GET'])
+def deleteorder(orderid):
+        conn = sqlite3.connect('file.db')
+        c = conn.cursor()
+
+        c.execute("""DELETE FROM orders WHERE orderid = (?);""", (orderid,))
+
+        conn.commit()
+        conn.close()
+
+        return redirect('/editorders')
 # ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
 # ````````````````````````````RAWMATERIAL``````````````````````````````````````````
-@app.route('/rawmaterial')
+@app.route('/addrawmaterial')
 def rawmaterial():
     return render_template('add_rawmaterials.html')
 
@@ -206,17 +258,74 @@ def  add_rawmaterials():
     conn.commit()
     conn.close()
     
-    return render_template("rawmaterials.html")
+    return redirect('/editrawmaterials')
 
-@app.route('/viewrawmaterials')
-def render_all_rawmaterials():
-    with sqlite3.connect('file.db') as conn:
+# @app.route('/viewrawmaterials')
+# def render_all_rawmaterials():
+#     with sqlite3.connect('file.db') as conn:
+#         c = conn.cursor()
+
+#         rawmaterials_query = c.execute("""SELECT * FROM rawmaterials""").fetchall()
+
+#         return render_template("rawmaterials.html", rawmaterials=rawmaterials_query)
+
+@app.route('/editrawmaterials')
+def render_editrawmaterials():
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+    rawmaterials_query = c.execute("""SELECT * FROM rawmaterials""").fetchall()
+
+    return render_template("editrawmaterials.html", rawmaterials=rawmaterials_query)
+
+@app.route('/editrawmaterials/<int:orderid>')
+def editrawmaterial(orderid):
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+
+    post = c.execute("SELECT * FROM rawmaterials WHERE orderid=?", (orderid, )).fetchone() 
+    #   print(post)
+    return render_template('updaterawmaterial.html', posts=post)
+
+@app.route('/updaterawmaterial/<int:orderid>', methods=["POST"])
+def updaterawmaterial(orderid):
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+    # if request.method == "POST":
+    clientid = request.form.get("clientid")
+    orderid = request.form.get("orderid")
+    materials = request.form.get("materials")
+    cost = request.form.get("cost")
+
+    t = (clientid,orderid,materials,cost,orderid)
+    # print(orderid,clientid)       
+    c.execute("""UPDATE rawmaterials 
+                     SET 
+                     orderid=?,
+                     clientid=?,
+                     materials=?,
+                     cost=?
+                     WHERE orderid=?""", t)
+    conn.commit()
+    conn.close()
+
+    return redirect('/editrawmaterials')
+# return redirect('/')
+
+@app.route('/deleterawmaterial/<int:orderid>', methods=['POST', 'GET'])
+def deleterawmaterial(orderid):
+        conn = sqlite3.connect('file.db')
         c = conn.cursor()
 
-        rawmaterials_query = c.execute("""SELECT * FROM rawmaterials""").fetchall()
+        c.execute("""DELETE FROM rawmaterials WHERE orderid = (?);""", (orderid,))
 
-        return render_template("rawmaterials.html", rawmaterials=rawmaterials_query)
+        conn.commit()
+        conn.close()
+
+        return redirect('/editrawmaterials')
 # ``````````````````````````````````````````````````````````````````````````````````````
+
+
+
 
 # `````````````````````````````````````````PRODUCTION```````````````````````````````````````````````````````````````
 @app.route('/production')
@@ -239,7 +348,7 @@ def  add_production():
     conn.commit()
     conn.close()
     
-    return render_template("productions.html")
+    return redirect('/editproductions')
 
 @app.route('/viewproductions')
 def render_all_productions():
@@ -249,6 +358,66 @@ def render_all_productions():
         productions_query = c.execute("""SELECT * FROM production""").fetchall()
 
         return render_template("productions.html", productions=productions_query)
+
+@app.route('/editproductions')
+def render_editproductions():
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+    productions_query = c.execute("""SELECT * FROM production""").fetchall()
+
+    return render_template("editproductions.html", productions=productions_query)
+
+@app.route('/editproductions/<int:orderid>')
+def editproduction(orderid):
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+
+    post = c.execute("SELECT * FROM production WHERE orderid=?", (orderid, )).fetchone() 
+    #   print(post)
+    return render_template('updateproduction.html', posts=post)
+
+@app.route('/updateproduction/<int:orderid>', methods=["POST"])
+def updateproduction(orderid):
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+    # if request.method == "POST":
+    clientid = request.form.get("clientid")
+    orderid = request.form.get("orderid")
+    requireddays = request.form.get("requireddays")
+    startdate = request.form.get("startdate")
+    enddate = request.form.get("enddate")
+    extradays = request.form.get("extradays")
+
+    t = (clientid,orderid,requireddays,startdate,enddate, extradays, orderid)
+    # print(orderid,clientid)       
+    c.execute("""UPDATE production 
+                     SET 
+                     clientid=?,
+                     orderid=?,
+                     requireddays=?,
+                     startdate=?,
+                     enddate=?,
+                     extradays=?
+                     WHERE orderid=?""", t)
+    conn.commit()
+    conn.close()
+
+    return redirect('/editproductions')
+# return redirect('/')
+
+@app.route('/deleteproduction/<int:orderid>', methods=['POST', 'GET'])
+def deleteproduction(orderid):
+        conn = sqlite3.connect('file.db')
+        c = conn.cursor()
+
+        c.execute("""DELETE FROM production WHERE orderid = (?);""", (orderid,))
+
+        conn.commit()
+        conn.close()
+
+        return redirect('/editproductions')
+
+
 # ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
 # ```````````````````````````````````````````SHIPMENT```````````````````````````````````````````````````````````
@@ -267,11 +436,11 @@ def  add_shipment():
     shippingaddress = request.form.get("shippingaddress")
     transportationtype = request.form.get("transportationtype")
     
-    c.execute("INSERT INTO shipment VALUES (?, ?, ?, ?, ?, ?)",(clientid, orderid, weight, shippingaddress, transportationtype))
+    c.execute("INSERT INTO shipment VALUES (?, ?, ?, ?, ?)",(clientid, orderid, weight, shippingaddress, transportationtype))
     conn.commit()
     conn.close()
     
-    return render_template("shipments.html")
+    return redirect('/editshipments')
 
 @app.route('/viewshipments')
 def render_all_shipments():
@@ -281,4 +450,62 @@ def render_all_shipments():
         shipments_query = c.execute("""SELECT * FROM shipment""").fetchall()
 
         return render_template("shipments.html", shipments=shipments_query)
+
+@app.route('/editshipments')
+def render_editshipments():
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+    shipments_query = c.execute("""SELECT * FROM shipment""").fetchall()
+
+    return render_template("editshipment.html", shipments=shipments_query)
+
+@app.route('/editshipments/<int:orderid>')
+def editshipment(orderid):
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+
+    post = c.execute("SELECT * FROM shipment WHERE orderid=?", (orderid, )).fetchone() 
+    #   print(post)
+    return render_template('updateshipment.html', posts=post)
+
+@app.route('/updateshipment/<int:orderid>', methods=["POST"])
+def updateshipment(orderid):
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+    # if request.method == "POST":
+    clientid = request.form.get("clientid")
+    orderid = request.form.get("orderid")
+    weight = request.form.get("weight")
+    shipping_address = request.form.get("shipping_address")
+    transportation_type = request.form.get("transportation_type")
+
+    t = (orderid,clientid,weight,shipping_address, transportation_type, orderid)
+    # print(orderid,clientid)       
+    c.execute("""UPDATE shipment 
+                     SET 
+                     orderid=?,
+                     clientid=?,
+                     weight=?,
+                     shipping_address=?,
+                     transportation_type=?
+                     WHERE orderid=?""", t)
+    conn.commit()
+    conn.close()
+
+    return redirect('/editshipments')
+# return redirect('/')
+
+@app.route('/deleteshipments/<int:orderid>', methods=['POST', 'GET'])
+def deleteshipment(orderid):
+        conn = sqlite3.connect('file.db')
+        c = conn.cursor()
+
+        c.execute("""DELETE FROM shipment WHERE orderid = (?);""", (orderid,))
+
+        conn.commit()
+        conn.close()
+
+        return redirect('/editshipments')
+
+
 # ``````````````````````````````````````````````````````````````````````````````````````````````````````

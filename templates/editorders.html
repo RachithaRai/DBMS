@@ -1,4 +1,4 @@
-<!-- {% extends "layout.html" %} -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,23 +7,27 @@
      <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
     <title>Document</title>
 </head>
-<!-- {% block body %} -->
+
 <body>
-    <h1 style="text-align: center; margin-top: 107px;">Orders Details</h1>
+    <h1 id="edithead" style="text-align: center;">Orders Details</h1>
     <div class="table">
-        <table class="viewtable">
-            <tr class="tablehead">
+        <table id ="edittable">
+            <tr>
                 <th>Order Id</th>
                 <th>Client Id</th>
                 <th>Order Date</th>
                 <th>Product Name</th>
-                <th>Product Id</th>
                 <th>Description</th>
                 <th>Estimated Cost</th>
                 <th>Deadline</th>
+                <th>Edit</th>
+                <th>Delete</th>
                 <!-- <th style="border: 1px solid black;">ACTION</th> -->
             </tr>
-    
+            <div>
+                <a id="edit" href="/addorders">ADD ORDER</a>
+            </div>    
+
             {% for order in orders %} 
                 <form action="" method="POST">
                     <tr>
@@ -34,9 +38,8 @@
                         <td>{{order[4]}}</td>
                         <td>{{order[5]}}</td>
                         <td>{{order[6]}}</td>
-                        <td>{{order[7]}}</td>
-                        <td><a href="/editorders/{{order[0]}}">UPDATE</a></td>
-                        <td><a href=""><input type="submit" value="DELETE"></a></td>
+                        <td><a id="edit" href="/editorders/{{order[0]}}">UPDATE</a></td>
+                        <td><a id="edit" href="/deleteorder/{{order[0]}}">DELETE</a></td>
                     </tr>
                 </form>
             {% endfor %}
@@ -44,5 +47,5 @@
         </table>
     </div>
 </body>
-<!-- {% endblock %} -->
+
 </html>

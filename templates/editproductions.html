@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="edithead" style="text-align: center;">Production Details</h1>
+    <div class="table">
+        <table id ="edittable">
+            <tr>
+                <th>Client Id</th>
+                <th>Order Id</th>
+                <th>Required days</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Extra Days</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <!-- <th style="border: 1px solid black;">ACTION</th> -->
+            </tr>
+            <div>
+                <a id="edit" href="/production">ADD PRODUCTION</a>
+            </div>    
+
+            {% for production in productions %} 
+                <form action="" method="POST">
+                    <tr>
+                        <td>{{production[0]}}</td>
+                        <td>{{production[1]}}</td>
+                        <td>{{production[2]}}</td>
+                        <td>{{production[3]}}</td>
+                        <td>{{production[4]}}</td>
+                        <td>{{production[5]}}</td>
+                        <td><a id="edit" href="/editproductions/{{production[1]}}">UPDATE</a></td>
+                        <td><a id="edit" href="/deleteproduction/{{production[1]}}">DELETE</a></td>
+                    </tr>
+                </form>
+            {% endfor %}
+    
+        </table>
+    </div>
+</body>
+
+</html>

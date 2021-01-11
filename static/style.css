@@ -57,7 +57,7 @@ body{
 .list{
     display: flex ;
     list-style: none;
-    padding-left: 724px;
+    padding-left: 620px;
 
 }
 
@@ -103,6 +103,7 @@ body{
 } */
 .content{
     padding:0;
+    /* margin-top: 254px; */
 }
 
 .signinform{
@@ -124,7 +125,7 @@ body{
    }
    
 
-  input[type=text] {
+  #sign[type=text] {
     width: 100%;
     padding: 14px ;
     margin: 8px 0;
@@ -136,7 +137,7 @@ body{
     box-sizing: border-box;
   }
   
-  input[type=password] {
+  #sign[type=password] {
     width: 100%;
     padding: 14px ;
     margin: 8px 0;
@@ -148,7 +149,7 @@ body{
     box-sizing: border-box;
   }
 
-  input[type=submit] {
+  #sign[type=submit] {
     width: 100%;
     background-color: #14bf98;
     color: white;
@@ -159,7 +160,7 @@ body{
     cursor: pointer;
   }
   
-  input[type=submit]:hover {
+  #sign[type=submit]:hover {
     background-color: #153e52;
     border: 1px solid #14bf98;
     color: #14bf98
@@ -269,25 +270,180 @@ button.optionbutton:nth-child(1) {
    }
    
 
-
-
-
-
-
-table{
-    border-spacing: 1;
-    border-collapse: collapse;
-    background: #113448;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
+.table{
+    width:min-content;
+    text-align: center;
+    margin: auto;
 }
 
-tr{
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
+.table > div:nth-child(1) > a:nth-child(1) {
+    margin-top: 12px;
+    margin-bottom: 28px;
+   }
+   
+
+#edithead{
+    margin: 50px auto 50px auto;
+}
+
+
+#edittable {
+    font: 500 1rem/1rem "Open Sans",sans-serif;
+    border-collapse: collapse;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  #edittable td, #edittable th {
+    border: 1px solid #ddd;
+    
+    padding: 8px;
+  }
+  
+  #edittable tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #edittable tr:hover {background-color: #ddd;}
+  
+  #edittable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #113448;
+    color: white;
+  }
+
+  #edit:link, #edit:visited {
+    background-color: #14bf98;
+    border-radius: 3px;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  #edit:hover, #edit:active {
+    background-color: #ffffff;
+    border: 1px solid #14bf98;
+    color: #14bf98;
+    transition: all 0.2s ease-in;
+  }
+
+
+
+.addform{
+    padding: 211px 0px;
+    background-color: #153e52;
+   /* yo tatti */
+
+}
+
+#signin{
+    margin: 0 auto;
+    /* margin-top: 115px; */
+    /* width: 400px; */
+   
+}
+
+#signin > input:nth-child(1) {
+    margin-bottom: 15px;
+   }
+   
+
+  #sign[type=text] {
+    width: 100%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: white;
+    background-color: #2a5d77;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  #sign[type=password] {
+    width: 100%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: white;
+    background-color: #2a5d77;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  #sign[type=submit] {
+    width: 100%;
+    background-color: #14bf98;
+    color: white;
+    padding: 14px ;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #sign[type=submit]:hover {
+    background-color: #153e52;
+    border: 1px solid #14bf98;
+    color: #14bf98
+  }
+  
+.signin {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+
+
+
+
+  #add[type=text] {
+    width: 90%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: #113448;
+    background-color: #ffffff;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  #add[type=password] {
+    width: 100%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: 113448;
+    background-color: #2a5d77;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  #add[type=submit] {
+    width: 90%;
+    background-color: #14bf98;
+    color: white;
+    padding: 14px ;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #add[type=submit]:hover {
+    background-color: #153e52;
+    border: 1px solid #14bf98;
+    color: #14bf98
+  }
+
+
+#addh1{
+    text-align: center;
+    color: #113448;
+    margin: 75px 0px 75px 0px;
 }
