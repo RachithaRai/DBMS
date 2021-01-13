@@ -39,6 +39,7 @@ def  clientdetails():
     conn = sqlite3.connect('file.db')
     c = conn.cursor()
     
+    clientid = request.form.get("clientid")
     clientusername = request.form.get("clientusername")
     password = request.form.get("password")
     name = request.form.get("name")
@@ -47,11 +48,11 @@ def  clientdetails():
     mailid = request.form.get("mailid")
     address = request.form.get("address")
     
-    c.execute("INSERT INTO client (clientusername, password, company, address, name, contact, mailid) VALUES(?, ?, ?, ?, ?, ?, ?)", (clientusername, password, company, address, name, contact, mailid) )
+    c.execute("INSERT INTO client (clientid, clientusername, password, company, address, name, contact, mailid) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", (clientid, clientusername, password, company, address, name, contact, mailid) )
     conn.commit()
     conn.close()
 
-    return "Successful"
+    return redirect('/clientdisplay/{}'.format(clientusername))
 # ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
 # ```````````````````````````````````LOGIN```````````````````````````````````````````````````````````````````
@@ -84,7 +85,7 @@ def admin():
     adminpassword = request.form.get("password")
  
 
-    post = c.execute("SELECT * FROM client WHERE clientusername=? and password=?", (user, adminpassword)).fetchone() 
+    post = c.execute("SELECT * FROM client WHERE clientid=? and password=?", (user, adminpassword)).fetchone() 
 
     if user == ausername and adminpassword == apassword:
         session['admin'] = user
@@ -93,13 +94,45 @@ def admin():
     elif post != None:
         session['client'] = user
         print(session['client'])
-        return 'display'
+        return redirect('/display/{}'.format(session['client']), )
     else:
         return'nodata'
     # if 'user' in session:
     #     user = session['user']
     #     return render_template('category.html')
     
+
+@app.route('/clientdisplay/<string:clientusername>')
+def display(clientusername):
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+    print(clientusername)
+
+
+    q = c.execute("""SELECT clientid, clientusername, company, address, name, contact, mailid
+                    FROM client WHERE clientusername=?""", (clientusername, )).fetchall()
+    print(q)
+    conn.commit()
+    conn.close()
+    return render_template('clientdisplay.html', clients=q)
+    # return "hello"
+
+
+@app.route('/display/<int:clientid>')
+def displayclientorder(clientid):
+    conn = sqlite3.connect('file.db')
+    c = conn.cursor()
+    print(clientid)
+
+
+    q = c.execute("""SELECT c.clientid, c.clientusername, o.orderid, o.orderdate, p.startdate, p.enddate, s.shipping_address
+                    FROM client c, orders o, production p, shipment s WHERE c.clientid=o.clientid AND c.clientid=p.clientid AND c.clientid=s.clientid AND c.clientid=?""", (clientid, )).fetchall()
+    print(q)
+    conn.commit()
+    conn.close()
+    return render_template('clientdisplay.html', clients=q)
+
+
     
 @app.route('/user')
 def user():    

@@ -1,0 +1,1 @@
+delete from client where clientusername="client5";

@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="edithead" style="text-align: center;">Client Details</h1>
+    <div class="table">
+        <table id ="edittable">
+            <tr>
+                <th>Client Id</th>
+                <th>Client Username</th>
+                <th>Company</th>
+                <th>Address</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Mail Id</th>
+                
+                <!-- <th style="border: 1px solid black;">ACTION</th> -->
+            </tr>
+            
+            {% for client in clients %} 
+                <form action="" method="POST">
+                    <tr>
+                        <td>{{client[0]}}</td>
+                        <td>{{client[1]}}</td>
+                        <td>{{client[2]}}</td>
+                        <td>{{client[3]}}</td>
+                        <td>{{client[4]}}</td>
+                        <td>{{client[5]}}</td>
+                        <td>{{client[6]}}</td>
+
+                        
+                    </tr>
+                </form>
+            {% endfor %}
+    
+        </table>
+    </div>
+</body>
+
+</html>

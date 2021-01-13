@@ -9,13 +9,13 @@ def init_db():
 
         c.execute("""   CREATE TABLE IF NOT EXISTS client (
                         clientid INTEGER PRIMARY KEY,
-                        clientusername TEXT,
-                        password TEXT,
-                        company TEXT,
-                        address TEXT,
-                        name TEXT,
-                        contact INTEGER,
-                        mailid TEXT
+                        clientusername TEXT UNIQUE,
+                        password TEXT UNIQUE,
+                        company TEXT UNIQUE,
+                        address TEXT UNIQUE,
+                        name TEXT UNIQUE,
+                        contact INTEGER UNIQUE,
+                        mailid TEXT UNIQUE
                 );
                 """)
         conn.commit()
