@@ -1,1 +1,4 @@
-delete from client where clientusername="client5";
+-- .header ON
+-- .mode COLUMN
+-- PRAGMA table_info('shipment');
+ALTER TABLE client DROP COLUMN clientusername;

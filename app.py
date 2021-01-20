@@ -85,7 +85,7 @@ def admin():
     adminpassword = request.form.get("password")
  
 
-    post = c.execute("SELECT * FROM client WHERE clientid=? and password=?", (user, adminpassword)).fetchone() 
+    post = c.execute("SELECT * FROM client WHERE clientusername=? and password=?", (user, adminpassword)).fetchone() 
 
     if user == ausername and adminpassword == apassword:
         session['admin'] = user
@@ -118,18 +118,21 @@ def display(clientusername):
     # return "hello"
 
 
-@app.route('/display/<int:clientid>')
-def displayclientorder(clientid):
+@app.route('/display/<string:clientusername>')
+def displayclientorder(clientusername):
     conn = sqlite3.connect('file.db')
     c = conn.cursor()
-    print(clientid)
+    print(clientusername)
 
 
     q = c.execute("""SELECT c.clientid, c.clientusername, o.orderid, o.orderdate, p.startdate, p.enddate, s.shipping_address
-                    FROM client c, orders o, production p, shipment s WHERE c.clientid=o.clientid AND c.clientid=p.clientid AND c.clientid=s.clientid AND c.clientid=?""", (clientid, )).fetchall()
-    print(q)
+                    FROM client c, orders o, production p, shipment s 
+                    WHERE c.clientusername=? AND c.clientid=o.clientid AND c.clientid=p.clientid AND c.clientid=s.clientid 
+                    AND o.orderid=p.orderid AND o.orderid=s.orderid """, (clientusername, )).fetchall()
+    # print(q)
     conn.commit()
     conn.close()
+    print (q)
     return render_template('clientdisplay.html', clients=q)
 
 
@@ -145,6 +148,7 @@ def user():
 @app.route('/logout')
 def logout():
     session.pop('user', None)
+    return 'logged out'
 
 
 @app.route('/client')
