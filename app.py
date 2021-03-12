@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import sqlite3
-
+from datetime import datetime
 app = Flask(__name__)
 
 app.secret_key = ('secret key')
@@ -34,6 +34,10 @@ def layout():
 def client_signup():
     return render_template('signup.html')
 
+# @app.route('/signout')
+# def client_signup():
+#     return render_template('signup.html')
+
 @app.route('/signup_button', methods=["POST"])
 def  clientdetails():
     conn = sqlite3.connect('file.db')
@@ -52,28 +56,14 @@ def  clientdetails():
     conn.commit()
     conn.close()
 
-    return redirect('/clientdisplay/{}'.format(clientusername))
+    # return redirect('/clientdisplay/{}'.format(clientusername))
+    return redirect('/signin')
 # ``````````````````````````````````````````````````````````````````````````````````````````````````````
 
 # ```````````````````````````````````LOGIN```````````````````````````````````````````````````````````````````
 @app.route('/signin')
 def signin():
     return render_template('signin.html')
-
-# @app.route('/client_login_button', methods=["POST"])
-# def  addclient():
-#     conn = sqlite3.connect('file.db')
-#     c = conn.cursor()
-
-#     clientusername = request.form.get("clientusername")
-#     password = request.form.get("password")
-    
-#     c.execute("INSERT INTO client VALUES (?, ?)", (clientusername, password))
-#     conn.commit()
-#     conn.close()
-
-#     return "Successful"
-
 
 
 @app.route('/admin_login_button', methods=["POST", "GET"])
@@ -120,20 +110,21 @@ def display(clientusername):
 
 @app.route('/display/<string:clientusername>')
 def displayclientorder(clientusername):
-    conn = sqlite3.connect('file.db')
-    c = conn.cursor()
-    print(clientusername)
+    if 'client' in session:
+        conn = sqlite3.connect('file.db')
+        c = conn.cursor()
+        print(clientusername)
 
 
-    q = c.execute("""SELECT c.clientid, c.clientusername, o.orderid, o.orderdate, p.startdate, p.enddate, s.shipping_address
-                    FROM client c, orders o, production p, shipment s 
-                    WHERE c.clientusername=? AND c.clientid=o.clientid AND c.clientid=p.clientid AND c.clientid=s.clientid 
-                    AND o.orderid=p.orderid AND o.orderid=s.orderid """, (clientusername, )).fetchall()
-    # print(q)
-    conn.commit()
-    conn.close()
-    print (q)
-    return render_template('clientdisplay.html', clients=q)
+        q = c.execute("""SELECT c.clientid, c.clientusername, o.orderid, o.orderdate, p.startdate, p.enddate, s.shipping_address
+                        FROM client c, orders o, production p, shipment s 
+                        WHERE c.clientusername=? AND c.clientid=o.clientid AND c.clientid=p.clientid AND c.clientid=s.clientid 
+                        AND o.orderid=p.orderid AND o.orderid=s.orderid """, (clientusername, )).fetchall()
+        # print(q)
+        conn.commit()
+        conn.close()
+        print (q)
+        return render_template('clientdisplay.html', clients=q)
 
 
     
@@ -190,15 +181,16 @@ def  add_orders():
     conn = sqlite3.connect('file.db')
     c = conn.cursor()
 
+    x = datetime.now()
     orderid = request.form.get("orderid")
     clientid = request.form.get("clientid")
-    orderdate = request.form.get("orderdate")
+    orderdate = "{}-{}-{}".format( x.day, x.month, x.year)
     productname = request.form.get("productname")
     description = request.form.get("description")
     estimatedcost = request.form.get("estimatedcost")
     deadline = request.form.get("deadline")
 
-    c.execute("INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?, ?)",(orderid, clientid, orderdate, productname, description, estimatedcost, deadline)) 
+    c.execute("INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?, ?)",(orderid, clientid, str(orderdate), productname, description, estimatedcost, str(deadline))) 
 
     conn.commit()
     conn.close()

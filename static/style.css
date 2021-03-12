@@ -180,7 +180,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin: 141px 100px 141px 100px;
+    margin: 235px 100px 141px 100px;
     
 
 }
@@ -423,8 +423,19 @@ button.optionbutton:nth-child(1) {
     border-radius: 4px;
     box-sizing: border-box;
   }
+  #add[type=date] {
+    width: 90%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: 113448;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-  #add[type=submit] {
+  
+#add[type=submit] {
     width: 90%;
     background-color: #14bf98;
     color: white;
@@ -447,3 +458,22 @@ button.optionbutton:nth-child(1) {
     color: #113448;
     margin: 75px 0px 75px 0px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#edithead {
+  text-align: center;
+  margin-top: 131px;
+ }
+ 
