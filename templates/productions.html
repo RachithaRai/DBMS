@@ -1,0 +1,40 @@
+<!-- {% extends "layout.html" %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+    <title>Document</title>
+</head>
+<!-- {% block body %} -->
+<body>
+    <h1 style="text-align: center; margin-top: 107px;">Productions Details</h1>
+    <div style="text-align: center; margin: 170px 40%;" >
+        <table style="border: 1px solid black; text-align: left;border-collapse: collapse;">
+            <tr style="border: 1px solid black;">
+                <th style="border: 1px solid black;">Client Id</th>
+                <th style="border: 1px solid black;">Order Id</th>
+                <th style="border: 1px solid black;">Required Days</th>
+                <th style="border: 1px solid black;">Start Date</th>
+                <th style="border: 1px solid black;">End Date</th>
+                
+            </tr>
+    
+            {% for production in productions %} 
+                <form action="" method="POST">
+                    <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;">{{production[0]}}</td>
+                        <td style="border: 1px solid black;">{{production[1]}}</td>
+                        <td style="border: 1px solid black;">{{production[2]}}</td>
+                        <td style="border: 1px solid black;">{{production[3]}}</td>
+                        <td style="border: 1px solid black;">{{production[4]}}</td>
+                    </tr>
+                </form>
+            {% endfor %}
+    
+        </table>
+    </div>
+</body>
+<!-- {% endblock %} -->
+</html>

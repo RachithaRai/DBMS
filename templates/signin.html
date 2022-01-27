@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+        <!-- <h1 style="text-align: center; font-size: 25px; margin-top: 10%">PLACE ORDERS</h1> -->
+        <!-- <div>
+            <div>
+                <form style="text-align: center; margin-top: 6%;" action='/client_login_button' method="POST">
+                    <div style="padding: 20px 0;">
+                        <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="clientusername" placeholder="Enter username">
+                    </div>
+                    <div style="padding: 10px 0;">
+                        <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="password" placeholder="Enter password">
+                    </div>           
+                    <button style="margin-top: 30px;" type="submit" value="Submit">Submit</button>
+                </form>
+            </div> -->
+            {% block body %}
+                <div class="signinform">
+                    
+                    <form id="signin" action='/admin_login_button' method="POST">
+                        <!-- <div class="input"> -->
+                            <!-- <h2 id="signin">SIGN IN</h2> -->
+                            <input id="sign" type="text" name="adminusername" placeholder="Enter Id">
+                        <!-- </div> -->
+                        <!-- <div class="input"> -->
+                            <input id="sign" type="password" name="password" placeholder="Enter password">
+                        <!-- </div>            -->
+                        <input id="sign" type="submit" value="Submit"></input>
+                    </form>
+                </div>
+            {% endblock %}
+        <!-- </div> -->
+
+        

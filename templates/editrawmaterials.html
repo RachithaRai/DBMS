@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="edithead" style="text-align: center;">Rawmaterials Details</h1>
+    <div class="table">
+        <table id ="edittable">
+            <tr>
+                <th>Client Id</th>
+                <th>Order Id</th>
+                <th>Materials</th>
+                <th>Cost</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <!-- <th style="border: 1px solid black;">ACTION</th> -->
+            </tr>
+            <div>
+                <a id="edit" href="/addrawmaterial">ADD RAWMATERIAL</a>
+            </div>    
+
+            {% for rawmaterial in rawmaterials %} 
+                <form action="" method="POST">
+                    <tr>
+                        <td>{{rawmaterial[0]}}</td>
+                        <td>{{rawmaterial[1]}}</td>
+                        <td>{{rawmaterial[2]}}</td>
+                        <td>{{rawmaterial[3]}}</td>
+                        <td><a id="edit" href="/editrawmaterials/{{rawmaterial[1]}}">UPDATE</a></td>
+                        <td><a id="edit" href="/deleterawmaterial/{{rawmaterial[1]}}">DELETE</a></td>
+                    </tr>
+                </form>
+            {% endfor %}
+    
+        </table>
+    </div>
+</body>
+
+</html>

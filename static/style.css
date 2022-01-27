@@ -1,0 +1,479 @@
+
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+/* #113448, #14bf98, #484a46 */
+/* #153e52,  #2a5d77,  #39728f */
+
+
+html, body
+{
+    margin: 0px;
+    font: 550 1rem/1rem "Open Sans",sans-serif;
+    /* background-color: #153e52; */
+    background-color: #ffffff;
+    /* background-image: linear-gradient(#113448, #12746c); */
+    /* overflow: hidden; */
+}
+body{
+    width: 100%
+}
+
+
+.content{
+    width: 100%;
+    padding : 69px 0;
+}
+
+.navbar{
+    display: flex;
+    padding-right: 5rem;
+    padding-left: 5rem;
+    height: 4rem;
+    background-color: #113448;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+
+}
+
+.name > h2{
+    margin-top: 24.92px;
+    display: inline-block;
+    text-align: center;
+    color: #ffffff;
+}
+
+
+
+.links{
+    display: flex ;
+    flex-basis: auto;
+    flex-grow: 1;
+    align-items: center;
+
+}
+
+.list{
+    display: flex ;
+    list-style: none;
+    padding-left: 620px;
+
+}
+
+.items{
+    padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    color: #ffffff;
+    font: 550 1rem/1rem "Open Sans",sans-serif;
+}
+
+.items:hover{
+    color: #14bf98;
+}
+
+.home{
+    color: #14bf98;
+}
+
+.home:hover{
+    color: #FFF;
+}
+
+.footer{
+    background-color: #113448;
+    text-align: center;
+    /* margin-top: 606px; */
+    height: 3rem;
+}
+
+.copyright{
+    display: inline-flex;
+    text-align: center;
+    color: #dfe5ec;
+    font: 500 1rem/1rem "Open Sans",sans-serif;
+}
+
+/* ``````````````SIGNIN````````````````` */
+
+/* #signin{
+    text-align: center;
+    color: #ffffff;
+} */
+.content{
+    padding:0;
+    /* margin-top: 254px; */
+}
+
+.signinform{
+    padding: 211px 0px;
+    background-color: #153e52;
+   /* yo tatti */
+
+}
+
+#signin{
+    margin: 0 auto;
+    /* margin-top: 115px; */
+    width: 400px;
+   
+}
+
+#signin > input:nth-child(1) {
+    margin-bottom: 15px;
+   }
+   
+
+  #sign[type=text] {
+    width: 100%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: white;
+    background-color: #2a5d77;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  #sign[type=password] {
+    width: 100%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: white;
+    background-color: #2a5d77;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  #sign[type=submit] {
+    width: 100%;
+    background-color: #14bf98;
+    color: white;
+    padding: 14px ;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #sign[type=submit]:hover {
+    background-color: #153e52;
+    border: 1px solid #14bf98;
+    color: #14bf98
+  }
+  
+.signin {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+
+  /* ```````````````````````CARDS`````````````````````` */
+
+
+
+.cards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 235px 100px 141px 100px;
+    
+
+}
+
+/* .card{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #ffffff;
+    color: #484a46;
+    border-radius: 5px;
+    padding: 50px 0px;
+    width: 242px;
+    margin: 0px 30px 0px 0px;
+} */
+
+.card{
+    text-align: center;
+    /* background-color:#f2f8f9; */
+    color: #484a46;
+    border-radius: 5px;
+    height: 190px;
+    border: 1px solid#39728f;
+
+    transition: all 0.2s ease-out;
+    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+    top: -4px;
+    border: 1px solid #cccccc;
+    background-color: white;
+    
+}
+
+.card:hover{
+    border: 1px solid#39728f;
+}
+
+/* .card:hover {
+    transition: all 0.2s ease-out;
+    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+    top: -4px;
+    border: 1px solid #cccccc;
+    background-color: white;
+  } */
+
+div.card:nth-child(1) > img:nth-child(2) {
+    padding-top: 9px;
+}
+
+/* .card > h3{
+    margin-top: 26px;
+    height: 80px;
+} */
+
+
+.card1{
+    display: grid;
+}
+
+.button{
+    text-align: center;
+    width: 242px;
+    margin-top: -21px;
+}
+
+.optionbutton{
+    background-color: #14bf98;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    width: 70px;
+    height: 40px;
+    
+}
+
+.optionbutton:hover{
+    transition: all 0.2s ease-out;
+    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+    top: -4px;
+    background-color: #ffffff;
+    border: 1px solid #14bf98;
+    color:#14bf98
+}
+
+
+button.optionbutton:nth-child(1) {
+    margin-right: 10px;
+   }
+   
+
+.table{
+    width:min-content;
+    text-align: center;
+    margin: auto;
+}
+
+.table > div:nth-child(1) > a:nth-child(1) {
+    margin-top: 12px;
+    margin-bottom: 28px;
+   }
+   
+
+#edithead{
+    margin: 50px auto 50px auto;
+}
+
+
+#edittable {
+    font: 500 1rem/1rem "Open Sans",sans-serif;
+    border-collapse: collapse;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  #edittable td, #edittable th {
+    border: 1px solid #ddd;
+    
+    padding: 8px;
+  }
+  
+  #edittable tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #edittable tr:hover {background-color: #ddd;}
+  
+  #edittable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #113448;
+    color: white;
+  }
+
+  #edit:link, #edit:visited {
+    background-color: #14bf98;
+    border-radius: 3px;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  #edit:hover, #edit:active {
+    background-color: #ffffff;
+    border: 1px solid #14bf98;
+    color: #14bf98;
+    transition: all 0.2s ease-in;
+  }
+
+
+
+.addform{
+    padding: 211px 0px;
+    background-color: #153e52;
+   /* yo tatti */
+
+}
+
+#signin{
+    margin: 0 auto;
+    /* margin-top: 115px; */
+    /* width: 400px; */
+   
+}
+
+#signin > input:nth-child(1) {
+    margin-bottom: 15px;
+   }
+   
+
+  #sign[type=text] {
+    width: 100%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: white;
+    background-color: #2a5d77;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  #sign[type=password] {
+    width: 100%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: white;
+    background-color: #2a5d77;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  #sign[type=submit] {
+    width: 100%;
+    background-color: #14bf98;
+    color: white;
+    padding: 14px ;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #sign[type=submit]:hover {
+    background-color: #153e52;
+    border: 1px solid #14bf98;
+    color: #14bf98
+  }
+  
+.signin {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+
+
+
+
+  #add[type=text] {
+    width: 90%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: #113448;
+    background-color: #ffffff;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  #add[type=password] {
+    width: 100%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: 113448;
+    background-color: #2a5d77;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  #add[type=date] {
+    width: 90%;
+    padding: 14px ;
+    margin: 8px 0;
+    display: block;
+    color: 113448;
+    border: 1px solid #39728f; 
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  
+#add[type=submit] {
+    width: 90%;
+    background-color: #14bf98;
+    color: white;
+    padding: 14px ;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #add[type=submit]:hover {
+    background-color: #153e52;
+    border: 1px solid #14bf98;
+    color: #14bf98
+  }
+
+
+#addh1{
+    text-align: center;
+    color: #113448;
+    margin: 75px 0px 75px 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#edithead {
+  text-align: center;
+  margin-top: 131px;
+ }
+ 

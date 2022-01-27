@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">  
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+        <title>{{title}}</title>
+    </head>
+
+<body>
+    <h1 id="addh1">SHIPMENT DETAILS</h1>
+    
+    <form id="signin" action='/add_shipment_button' method="POST">
+       
+            <input id="add" type="text" name="clientid" placeholder="Enter clientid">
+        
+            <input id="add" type="text" name="orderid" placeholder="Enter orderid">
+           
+            <input id="add" type="text" name="weight" placeholder="Enter weight">
+        
+            <input id="add" type="text" name="shippingaddress" placeholder="Enter shipping address">
+        
+       
+            <input id="add" type="text" name="transportationtype" placeholder="Enter transportation type">
+        
+
+            
+            <input id="add" type="submit" value="Submit"></input>
+       
+    </form>
+    <footer style="background-color: #212121; text-align: center; margin-top: 14%;">
+        <p style="color: white; padding: 15px 0 ;"></p>
+    </footer>
+</body>
+</html>

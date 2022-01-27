@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">  
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+        <title>{{title}}</title>
+    </head>
+
+<body>
+    <h1 id="addh1">PRODUCTION DETAILS</h1>
+    
+    <form id="signin" action='/add_production_button' method="POST">
+        
+            <input id="add" style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="clientid" placeholder="Enter clientid">
+        
+            <input id="add" style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="orderid" placeholder="Enter orderid">
+       
+        
+            <input id="add" style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="requireddays" placeholder="Enter requireddays">
+       
+        
+            <input id="add" style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="startdate" placeholder="Enter startdate">
+       
+        
+            <input id="add" style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="enddate" placeholder="Enter enddate">
+       
+        
+            <input id="add" style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="extradays" placeholder="Enter extra days taken">
+       
+            <input id="add" type="submit" value="Submit"></input>
+
+        
+    </form>
+</body>
+</html>

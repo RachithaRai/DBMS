@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">  
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+        <title>{{title}}</title>
+    </head>
+
+    
+
+</head>
+<body>
+    <h1 id="addh1">NEW ORDER</h1>
+    <div>
+    <form id="signin" action='/add_orders_button' method="POST">
+        <!-- <div style="padding: 20px 0;">
+            <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="orderid" placeholder="Enter orderid">
+        </div> -->
+        
+            <input id="add" type="text" name="clientid" placeholder="Enter clientid">
+        
+       
+            <!-- <input id="add" type="text" name="orderdate" placeholder="Enter orderdate"> -->
+       
+            <input id="add" type="text" name="productname" placeholder="Enter productname">
+       
+            <input id="add" type="text" name="description" placeholder="Enter description">
+        
+            <input id="add" type="text" name="estimatedcost" placeholder="Enter cost">
+       
+            <!-- <p styles='font-size: 1rem; opacity:50%; font-weight:100' >Deadline</p> -->
+            <label styles='font-size: 1rem; opacity:50%; font-weight:100'  >Deadline</label>
+            <input id="add" type="date" name="deadline" placeholder="Enter deadline">
+            <input id="add" type="submit" value="Submit"></input>
+    
+       
+        <!-- <button id=sign type="submit" value="Submit">SUBMIT</button> -->
+    </form>
+    
+</body>
+</html>

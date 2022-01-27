@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+    <title>Document</title>
+
+
+</head>
+<body>
+
+    <header>
+        <h1>SIGNUP</h1>
+    </header> 
+    <!-- <h1 style="text-align: center; font-size: 25px; margin-top: 10%">PLACE ORDERS</h1> -->
+    <div>
+            <form style="text-align: center; margin-top: 6%;" action='/signup_button' method="POST">
+                <!-- <div style="padding: 20px 0;">
+                    <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="clientid" placeholder="Enter clientid">
+                </div> -->
+                <div style="padding: 20px 0;">
+                    <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="clientusername" placeholder="Enter username">
+                </div>
+                <div style="padding: 10px 0;">
+                    <input style="background-color: #d3d1d1; padding: 10px 20px;" type="password" name="password" placeholder="Enter password">
+                </div>
+                <div style="padding: 20px 0;">
+                    <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="name" placeholder="Enter your name">
+                </div>
+                <div style="padding: 10px 0;">
+                    <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="company" placeholder="Enter company name">
+                </div>
+                <div style="padding: 10px 0;">
+                    <input style="background-color: #d3d1d1; padding: 10px 20px;" type="tel" pattern="[0-9]{10}" name="contact" placeholder="Enter contact no">
+                </div>
+                <div style="padding: 10px 0;">
+                    <input style="background-color: #d3d1d1; padding: 10px 20px;" type="email" name="mailid" placeholder="Enter email id">
+                </div>
+                <div style="padding: 10px 0;">
+                    <input style="background-color: #d3d1d1; padding: 10px 20px;" type="text" name="address" placeholder="Enter adress">
+                </div>
+            
+                <button style="margin-top: 30px;" type="submit" value="Submit">Submit</button>
+            </form>
+    </div>
+
+    <footer style="background-color: #212121; text-align: center; margin-top: 14%;">
+        <p style="color: white; padding: 15px 0 ;"></p>
+    </footer>
+</body>
+</html>

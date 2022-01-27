@@ -1,0 +1,56 @@
+<!-- {% extends "layout.html" %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{{ url_for('static' , filename='style.css' ) }}">
+    <title>Document</title>
+</head>
+<!-- {% block body %} -->
+<body>
+    <div class="navbar">           
+        <div class="name"><h2>SHIPLANCE</h2></div>
+        <div class="links">
+            <ul class="list">
+                <li><a class="items home" href="">HOME</a></li>
+                <li><a class="items" href="/signin">SIGN IN</a></li>
+                <li><a class="items" href="/signup">SIGN UP</a></li>
+                <li><a class="items" href="">ABOUT</a></li>
+                <li><a class="items" href="/signout">SIGN OUT</a></li>
+            </ul>                                
+        </div>
+    </div>
+    <h1 style="text-align: center; margin-top: 107px;">Orders Details</h1>
+    <div>
+        <table>
+            <tr>
+                <th>Order Id</th>
+                <th>Client Id</th>
+                <th>Order Date</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Estimated Cost</th>
+                <th>Deadline</th>
+            </tr>
+    
+            {% for order in orders %} 
+                <form action="" method="POST">
+                    <tr style="border: 1px solid black;">
+                        <td>{{order[0]}}</td>
+                        <td>{{order[1]}}</td>
+                        <td>{{order[2]}}</td>
+                        <td>{{order[3]}}</td>
+                        <td>{{order[4]}}</td>
+                        <td>{{order[5]}}</td>
+                        <td>{{order[6]}}</td>
+                        
+                    </tr>
+                </form>
+            {% endfor %}
+    
+        </table>
+    </div>
+</body>
+<!-- {% endblock %} -->
+</html>
